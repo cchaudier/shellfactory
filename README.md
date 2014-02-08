@@ -1,4 +1,4 @@
-shellfactory
+ShellFactory
 ============
 
-Lib for shellscripts
+Bibliothèque de fonctions pour scripts shell.
