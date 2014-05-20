@@ -8,3 +8,22 @@
 #@(#)    Commentaires :
 #@(#)======================================================================
 
+# Test et initialise les variables utils aux logs
+# USAGE : sflib_log_init
+# ----------------------------------------------
+sflib_log_init() {
+    output=screen # affichage des erreurs à l'ecran
+sflib_std_debug "DEBUT fct sflib_log_init()"
+    export SEVERITE=0
+    PERE=$PPID
+    FILS=$$
+    PID=$$
+
+    if ! tty -s; then
+        #Comme le script n'est pas lancé en ligne de commande on trace
+           dans un fichier
+        output=file #Sortie des traces dans un fichier uniquement
+    fi
+
+sflib_std_debug "FIN fct sflib_log_init()"
+}
