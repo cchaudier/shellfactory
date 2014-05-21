@@ -55,6 +55,14 @@ sflib_log_debug "FIN fct sflib_log_sortie()"
 # ----------------------------------------------
 sflib_log_create() { 
 #TODO verifier que rep_log et fic_log sont bien définit
+#On vérifie que la variable fic_log est renseignée
+        if [[ -z "$fic_log" ]]; then
+            printf '\033[1;31;40m'
+            echo "ERREUR : Variable fic_log vide"
+            printf '\033[0m'
+            output="screen"
+            echo "$type|$(sflib_log_date) : $msg"
+        fi
 #TODO utiliser un tableau de hachage log pour rep,fic et date
 #TODO verifier que script_nom est bien définit
 sflib_log_debug "DEBUT fct sflib_log_create()"
@@ -86,7 +94,7 @@ sflib_log_debug() {
 
 # sflib_log_print_color
 # Affiche la log en couleur en fonction du type
-# USAGE : sflib_log_print_color "message" type
+# USAGE : sflib_log_print_color <message> [type de trace] 
 sflib_log_print_color() {
     msg=$1
     type=$2
@@ -99,4 +107,37 @@ sflib_log_print_color() {
     esac
     echo "$type|$(sflib_log_date) : $msg"
     printf '\033[0m'
+}
+
+# sflib_log_trace
+# fonction de log principal
+# USAGE : sflib_log_trace <message> [type de trace] 
+# type :  I W E D
+#	I : information
+#	W : warning
+#	E : erreur
+#	D : debug
+# Si la fonction est appeler sans le type alors le type utilisé est I
+# Si la variable output existe, elle définit la sortie : 
+#		file = on ecrit dans un fichier (la variable fic_log doit être renseignée)
+#		both = on ecrit dans un fichier (la variable fic_log doit être renseignée) ET à l'ecran
+#		sinon : on ecrit à l'ecran, avec gestion des couleurs
+sflib_log_trace() {
+    msg=$1
+    if [[ $# -eq 2 ]]; then
+        type=$2
+    else
+        type=I
+    fi
+    
+    case $output in
+    file) echo "$type|$(sflib_std_dateLog) : $msg" >> $fic_log
+        ;;
+    both)
+	echo "$type|$(sflib_std_dateLog) : $msg" >> $fic_log
+        sflib_log_print_color "$msg" $type
+        ;;        
+    *) sflib_log_print_color "$msg" $type
+        ;;
+    esac
 }
