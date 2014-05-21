@@ -156,7 +156,7 @@ erreur() {
 }
 
 alias trc=trace
-alis warn=warning
+alias warn=warning
 alias err=erreur
 
 alias debug=sflib_log_debug

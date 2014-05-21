@@ -7,3 +7,41 @@
 #@(#)    Auteur : Christophe Chaudier www.cchaudier.fr
 #@(#)    Commentaires :
 #@(#)======================================================================
+
+# sflib_std_init
+# Test et initialise les Variables
+# USAGE : sflib_std_initVars
+# ----------------------------------------------
+sflib_std_init() {
+sflib_log_debug "DEBUT fct sflib_std_initVars()"
+    export SEVERITE=0
+    PERE=$PPID
+    FILS=$$
+    PID=$$
+
+    sflib_std_v_extSum=".sum"
+    sflib_std_v_extGzip=".gz"
+    sflib_std_v_ficConf=""
+
+    if tty -s; then
+        #Comme le script est lancé en ligne de commande on affiche des infos à l'écran
+        output=screen # affichage des erreurs à l'ecran
+    fi
+
+    #CC : On choisi le awk en fonction du systeme
+    OS=$(uname)
+    case ${OS} in
+        AIX|HP-UX|Linux|OSF1)
+            cmd_awk="awk"
+            ;;
+        SunOS)
+            cmd_awk="nawk"
+            ;;
+        *)
+            echo "OS non pris en Compte"
+            cmd_awk="awk"
+            ;;
+    esac
+    alias awk=$cmd_awk
+sflib_log_debug "FIN fct sflib_std_initVars()"
+}
