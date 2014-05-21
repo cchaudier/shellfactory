@@ -1,0 +1,9 @@
+language: bash
+
+before_script:
+    - git clone https://github.com/sstephenson/bats.git
+    - cd bats
+    - ./install.sh /usr/local 
+
+script:
+    - bash test/tests.sh
