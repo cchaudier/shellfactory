@@ -141,3 +141,22 @@ sflib_log_trace() {
         ;;
     esac
 }
+
+#Fonction de traces racourcit
+trace() {
+    sflib_std_trace "[*] $1" I
+}
+
+warning() {
+    sflib_std_trace "[=] $1" W
+}
+
+erreur() {
+    sflib_std_trace "[-] $1" E
+}
+
+alias trc=trace
+alis warn=warning
+alias err=erreur
+
+alias debug=sflib_log_debug
