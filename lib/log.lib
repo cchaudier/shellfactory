@@ -65,3 +65,10 @@ sflib_log_debug "DEBUT fct sflib_log_create()"
     sflib_std_fic_create ${fic_log}
 sflib_std_debug "FIN fct sflib_std_logCreate()"
 }
+
+# sflib_log_date
+# renvoi une date formaté pour les traces log
+# USAGE : sflib_log_date
+sflib_log_date() {
+    date '+%y%m%d_%Hh%Mm%S'
+}
