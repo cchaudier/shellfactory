@@ -26,6 +26,7 @@ sflib_log_debug "DEBUT fct sflib_log_init()"
         #Comme le script n'est pas lancé en ligne de commande on trace
            dans un fichier
         output=file #Sortie des traces dans un fichier uniquement
+	sflib_log_create
     fi
 
 sflib_log_debug "FIN fct sflib_log_init()"
@@ -46,4 +47,21 @@ sflib_log_debug "DEBUT fct sflib_log_sortie()"
         trace "Le fichier de log est : $fic_log"
     fi
 sflib_log_debug "FIN fct sflib_log_sortie()"
+}
+
+# sflib_log_create
+# Creation et initialisation de la log
+# USAGE : sflib_log_create
+# ----------------------------------------------
+sflib_log_create() { 
+#TODO verifier que rep_log et fic_log sont bien définit
+#TODO utiliser un tableau de hachage log pour rep,fic et date
+#TODO verifier que script_nom est bien définit
+sflib_log_debug "DEBUT fct sflib_log_create()"
+    date_log=$(sflib_log_date)
+    fic_log=${rep_log}/${script_nom}_${datelog}_${PID}.log
+
+    sflib_std_rep_create ${rep_log}
+    sflib_std_fic_create ${fic_log}
+sflib_std_debug "FIN fct sflib_std_logCreate()"
 }
