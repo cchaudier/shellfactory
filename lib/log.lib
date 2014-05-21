@@ -8,12 +8,15 @@
 #@(#)    Commentaires :
 #@(#)======================================================================
 
+# sflib_log_init
 # Test et initialise les variables utils aux logs
 # USAGE : sflib_log_init
 # ----------------------------------------------
 sflib_log_init() {
+# TODO : si sflib_std non chargé alors la charger car c'est une lib dépendante
+# TODO definir fic_log et rep_log
     output=screen # affichage des erreurs à l'ecran
-sflib_std_debug "DEBUT fct sflib_log_init()"
+sflib_log_debug "DEBUT fct sflib_log_init()"
     export SEVERITE=0
     PERE=$PPID
     FILS=$$
@@ -25,5 +28,22 @@ sflib_std_debug "DEBUT fct sflib_log_init()"
         output=file #Sortie des traces dans un fichier uniquement
     fi
 
-sflib_std_debug "FIN fct sflib_log_init()"
+sflib_log_debug "FIN fct sflib_log_init()"
+}
+
+# sflib_log_sortie
+# sortie de la lib proprement
+# USAGE : sflib_log_sortie
+# ----------------------------------------------
+sflib_log_sortie() {
+sflib_log_debug "DEBUT fct sflib_log_sortie()"
+    unset PERE
+    unset FILS
+    unset PID
+    if [[ $output == "screen" ]]; then
+        sflib_std_rm $fic_log
+    else
+        trace "Le fichier de log est : $fic_log"
+    fi
+sflib_log_debug "FIN fct sflib_log_sortie()"
 }
