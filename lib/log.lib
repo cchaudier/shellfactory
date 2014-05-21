@@ -72,3 +72,14 @@ sflib_std_debug "FIN fct sflib_std_logCreate()"
 sflib_log_date() {
     date '+%y%m%d_%Hh%Mm%S'
 }
+
+# sflib_log_debug
+# Affiche le message si le script est en mode debug
+# USAGE : sflib_log_debug "message"
+#----------------------------
+sflib_log_debug() {
+    msg_debug=$1
+    if [[ $DEBUG -eq 1 ]]; then
+        sflib_std_trace "==[DEBUG]== $msg_debug" D
+    fi
+}
