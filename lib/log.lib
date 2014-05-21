@@ -80,6 +80,6 @@ sflib_log_date() {
 sflib_log_debug() {
     msg_debug=$1
     if [[ $DEBUG -eq 1 ]]; then
-        sflib_std_trace "==[DEBUG]== $msg_debug" D
+        sflib_log_trace "==[DEBUG]== $msg_debug" D
     fi
 }
