@@ -6,4 +6,4 @@ before_script:
     - sudo ./install.sh /usr/local 
 
 script:
-    - bash test/tests.sh
+    - bash cd test && tests.sh
