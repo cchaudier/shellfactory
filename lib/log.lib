@@ -131,10 +131,10 @@ sflib_log_trace() {
     fi
     
     case $output in
-    file) echo "$type|$(sflib_std_dateLog) : $msg" >> $fic_log
+    file) echo "$type|$(sflib_log_date) : $msg" >> $fic_log
         ;;
     both)
-	echo "$type|$(sflib_std_dateLog) : $msg" >> $fic_log
+	echo "$type|$(sflib_date_date) : $msg" >> $fic_log
         sflib_log_print_color "$msg" $type
         ;;        
     *) sflib_log_print_color "$msg" $type
