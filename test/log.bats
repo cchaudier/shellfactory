@@ -1,5 +1,5 @@
 #!/usr/bin/env bats
-#Tests for std.lib
+#Tests for log.lib
 . ../lib/log.lib
 
 @test "function sflib_log_init exist" {
