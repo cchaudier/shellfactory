@@ -8,6 +8,11 @@
     [ "$status" -eq 0 ]
 }
 
+@test "function sflib_log_sortie exist" {
+  run sflib_log_debug
+    [ "$status" -eq 0 ]
+}
+
 @test "function sflib_log_debug exist" {
   run sflib_log_debug
     [ "$status" -eq 0 ]
