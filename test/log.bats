@@ -14,7 +14,7 @@
 }
 
 @test "function sflib_log_create exist" {
-  run sflib_log_debug
+  run sflib_log_create
     [ "$status" -eq 0 ]
 }
 
