@@ -9,7 +9,7 @@
 }
 
 @test "function sflib_log_sortie exist" {
-  run sflib_log_sortie
+  run sflib_log_debug
     [ "$status" -eq 0 ]
 }
 
