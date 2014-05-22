@@ -1,7 +1,12 @@
 #!/usr/bin/env bats
 
 #Tests for log.lib
-. ../lib/log.lib
+setup() {
+  . "$BATS_TEST_DIRNAME/../lib/log.lib"
+  . "$BATS_TEST_DIRNAME/../lib/std.lib"
+
+  rep_log=.
+}
 
 @test "function sflib_log_init exist" {
   run sflib_log_init
@@ -14,8 +19,9 @@
 }
 
 @test "function sflib_log_create exist" {
+skip
   run sflib_log_create
-    [ "$status" -eq 0 ]
+    [ $status -eq 0 ]
 }
 
 @test "function sflib_log_debug exist" {
