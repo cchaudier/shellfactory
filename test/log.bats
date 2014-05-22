@@ -24,7 +24,14 @@ skip
     [ $status -eq 0 ]
 }
 
-@test "function sflib_log_debug exist" {
-  run sflib_log_debug
-    [ "$status" -eq 0 ]
+@test "function sflib_log_debug return zero string without DEBUG mod" {
+  DEBUG=0
+  run sflib_log_debug "test debug"
+    [ -z $output ]
+}
+
+@test "function sflib_log_debug return a nonzero string with DEBUG mod" {
+  DEBUG=1
+  run sflib_log_debug "test debug"
+    [ ! -z "$output" ]
 }
