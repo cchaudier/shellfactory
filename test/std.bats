@@ -4,6 +4,5 @@
 . ../lib/std.lib
 
 @test "function sflib_std_init exist" {
-  run sflib_std_init
-    [ "$status" -eq 0 ]
+   command -v sflib_std_init
 }
