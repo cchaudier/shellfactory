@@ -10,19 +10,15 @@ setup() {
 }
 
 @test "function sflib_log_init exist" {
-  run sflib_log_init
-    [ "$status" -eq 0 ]
+  command -v sflib_log_init
 }
 
 @test "function sflib_log_sortie exist" {
-  run sflib_log_sortie
-    [ "$status" -eq 0 ]
+  command -v sflib_log_sortie
 }
 
 @test "function sflib_log_create exist" {
-skip
-  run sflib_log_create
-    [ $status -eq 0 ]
+  command -v sflib_log_create
 }
 
 @test "function sflib_log_debug return zero string without DEBUG mod" {
