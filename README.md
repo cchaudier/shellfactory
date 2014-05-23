@@ -1,9 +1,9 @@
 #﻿ShellFactory
 
 
-[![Build
+Travis [![Build
 Status](https://travis-ci.org/cchaudier/shellfactory.svg?branch=master)](https://travis-ci.org/cchaudier/shellfactory)
-[![Build
+| Drone.io [![Build
 Status](https://drone.io/github.com/cchaudier/shellfactory/status.png)](https://drone.io/github.com/cchaudier/shellfactory/latest)
 
 ## Qu'est-ce que c'est ?
