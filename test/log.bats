@@ -35,3 +35,12 @@ skip
   run sflib_log_debug "test debug"
     [ ! -z "$output" ]
 }
+
+@test "function sflib_log_init define all variables" {
+  sflib_log_init
+  echo "PERE $PERE, FILS $FILS, PID $PID, output $output"
+    [ -n "$PERE" ]
+    [ -n "$FILS" ]
+    [ -n "$PID" ]
+    [ -n "$output" ]
+}

@@ -15,6 +15,7 @@
 sflib_log_init() {
 # TODO : si sflib_std non chargé alors la charger car c'est une lib dépendante
 # TODO definir fic_log et rep_log
+# TODO changer le nom SEVERITE
     output=screen # affichage des erreurs à l'ecran
 sflib_log_debug "DEBUT fct sflib_log_init()"
     export SEVERITE=0
@@ -26,7 +27,7 @@ sflib_log_debug "DEBUT fct sflib_log_init()"
         #Comme le script n'est pas lancé en ligne de commande on trace
            dans un fichier
         output=file #Sortie des traces dans un fichier uniquement
-	sflib_log_create
+	      sflib_log_create
     fi
 
 sflib_log_debug "FIN fct sflib_log_init()"
