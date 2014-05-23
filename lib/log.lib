@@ -55,23 +55,22 @@ sflib_log_debug "FIN fct sflib_log_sortie()"
 # USAGE : sflib_log_create
 # ----------------------------------------------
 sflib_log_create() { 
-#TODO verifier que rep_log et fic_log sont bien définit
-#On vérifie que la variable fic_log est renseignée
-        if [[ -z "$fic_log" ]]; then
+sflib_log_debug "DEBUT fct sflib_log_create()"
+        if [[ -z "$rep_log" ]]; then
             printf '\033[1;31;40m'
-            echo "ERREUR : Variable fic_log vide"
+            echo "ERREUR : Variable rep_log vide"
             printf '\033[0m'
             output="screen"
             echo "$type|$(sflib_log_date) : $msg"
+        else
+#TODO verifier que script_nom est bien définit
+            date_log=$(sflib_log_date)
+            fic_log=${rep_log}/${script_nom}_${datelog}_${PID}.log
+
+            sflib_std_rep_create ${rep_log}
+            sflib_std_fic_create ${fic_log}
         fi
 #TODO utiliser un tableau de hachage log pour rep,fic et date
-#TODO verifier que script_nom est bien définit
-sflib_log_debug "DEBUT fct sflib_log_create()"
-    date_log=$(sflib_log_date)
-    fic_log=${rep_log}/${script_nom}_${datelog}_${PID}.log
-
-    sflib_std_rep_create ${rep_log}
-    sflib_std_fic_create ${fic_log}
 sflib_std_debug "FIN fct sflib_std_logCreate()"
 }
 

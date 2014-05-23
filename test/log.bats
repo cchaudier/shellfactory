@@ -6,6 +6,7 @@ setup() {
   . "$BATS_TEST_DIRNAME/../lib/std.lib"
 
   rep_log=.
+  script_nom=test_log
 }
 
 @test "function sflib_log_init exist" {
@@ -43,4 +44,11 @@ skip
     [ -n "$FILS" ]
     [ -n "$PID" ]
     [ -n "$output" ]
+}
+
+@test "function sflib_log_create create file in log rep" {
+skip
+  rep_log=./rep_test_log
+  run sflib_log_create
+    [ -e $fic_log ]
 }
