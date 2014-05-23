@@ -1,5 +1,5 @@
-﻿ShellFactory
-============
+#﻿ShellFactory
+
 
 [![Build
 Status](https://travis-ci.org/cchaudier/shellfactory.svg?branch=master)](https://travis-ci.org/cchaudier/shellfactory)
@@ -16,14 +16,8 @@ ShellFactory est écrit en bash. La compatibilité avec les autres shells n'est 
 
 ## Organisation
 
-.
-
-├── lib
-
-└── test
-
 Le répertoire lib contient les fichiers formant le cœur de la bibliothèque. Les fonctions sont regroupés par thématique. Chaque fichier est nommé avec 3 lettres et l'extention .lib.
-	log.lib : fonctions dédié aux traces
-	sdt.lib : fonctions utilitaires standards
+* log.lib : fonctions dédié aux traces
+* sdt.lib : fonctions utilitaires standards
 
 Le répertoire test contient les tests unitaires. J'utilise bats pour tester les fonctions. Chaque .lib a un fichier .bats associé. 
