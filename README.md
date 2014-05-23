@@ -6,13 +6,13 @@ Status](https://travis-ci.org/cchaudier/shellfactory.svg?branch=master)](https:/
 
 ## Qu'est-ce que c'est ?
 
-*ShellFactory* est une bibliothèque de fonctions pour scripts shell. Elle permet d'améliorer votre productivité et la robustesse de vos scripts.
+**ShellFactory** est une bibliothèque de fonctions pour scripts shell. Elle permet d'améliorer votre productivité et la robustesse de vos scripts.
 
 ## Avant-propos
 
 Cette bibliothèque est le fruit de 8 ans d'ecriture de scripts d'exploitation et d'administration système. J'ai décidé de toilleter, de moderniser et d'ouvrir le code pour la comunautée.
 
-*ShellFactory* est écrit en bash. La compatibilité avec les autres shells n'est pas assuré mais si cela vous interesse de travailler avec moi sur ce point alors n'hesitez pas a m'envoyer un petit mail. C'est avec plaisir que nous étendrons ensemble la compatibilité.
+**ShellFactory** est écrit en bash. La compatibilité avec les autres shells n'est pas assuré mais si cela vous interesse de travailler avec moi sur ce point alors n'hesitez pas a m'envoyer un petit mail. C'est avec plaisir que nous étendrons ensemble la compatibilité.
 
 ## Organisation
 
