@@ -35,11 +35,10 @@ setup() {
 
 @test "function sflib_log_init define all variables" {
   sflib_log_init
-  echo "PERE $PERE, FILS $FILS, PID $PID, output $output"
-    [ -n "$PERE" ]
-    [ -n "$FILS" ]
-    [ -n "$PID" ]
-    [ -n "$output" ]
+    [ -n $PERE ]
+    [ -n $FILS ]
+    [ -n $PID ]
+    [ -n $output ]
 }
 
 @test "function sflib_log_create create file in log rep" {
