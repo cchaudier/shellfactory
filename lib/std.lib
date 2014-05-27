@@ -95,12 +95,26 @@ return $retour
 sflib_std_fic_existe() {
   fichier_a_tester=$1
  
-sflib_log_debug "DEBUT fct sflib_std_ficExiste()"
+sflib_log_debug "DEBUT fct sflib_std_fic_existe()"
   retour=0
   if [[ ! -f ${fichier_a_tester} ]]; then
 sflib_log_debug "Le fichier <${fichier_a_tester}> n'existe pas !"    
     retour=1
   fi
-sflib_log_debug "FIN fct sflib_std_ficExiste()"
+sflib_log_debug "FIN fct sflib_std_fic_existe()"
   return $retour
+}
+
+# USAGE : sflib_std_fic_create <fichier>
+#Création du fichier s'il n'existe pas
+sflib_std_fic_create() {
+  fichier_a_creer=$1
+
+sflib_log_debug "DEBUT fct sflib_std_fic_create()"
+  sflib_std_fic_existe $fichier_a_creer
+  if [[ $? -ne 0 ]]; then
+    touch ${fichier_a_creer}
+    sflib_std_test_returncode "Création du fichier ${fichier_a_creer} impossible"
+  fi
+sflib_log_debug "FIN fct sflib_std_fic_create()"
 }

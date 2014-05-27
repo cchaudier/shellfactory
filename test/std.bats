@@ -104,3 +104,20 @@ skip
   run sflib_std_fic_existe $file
   [ "$status" -ne 0 ]
 }
+
+@test "DESCRIBE sflib_std_fic_create" {
+  command -v sflib_std_fic_create
+}
+
+@test "  -> return 0 if file is created" {
+  file=$BATS_TMPDIR/test_file_existe
+  run sflib_std_fic_create $file
+  [ "$status" -eq 0 ]
+  rm -f $file
+}
+
+@test "  -> return not null if file don't created" { 
+  file=/root/test_file_dont_existe
+  run sflib_std_fic_create $file
+  [ "$status" -ne 0 ]
+}
