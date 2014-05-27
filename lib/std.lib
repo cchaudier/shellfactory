@@ -56,3 +56,27 @@ if [[ $RC -ne 0 ]]; then
 fi
 sflib_log_debug "FIN fct sflib_std_testRC()"
 }
+
+# sflib_std_rep_create
+# Création du répertoire s'il n'existe pas
+# USAGE : sflib_std_rep_create <répertoire> [droit]
+sflib_std_rep_create() {
+    rep_a_creer=$1
+    if [[ $# -eq 2 ]]; then
+        droits=$2
+    else
+        droits=770
+    fi
+
+sflib_log_debug "DEBUT fct sflib_std_rep_create() [$rep_a_creer]"
+    sflib_std_rep_existe $rep_a_creer
+    if [[ $? -ne 0 ]]; then
+            #On crée le répertoire en profondeur
+            mkdir -p ${rep_a_creer}
+            sflib_std_test_returncode "Création du répèrtoire ${rep_a_creer} impossible"
+            chmod $droits ${rep_a_creer}
+            sflib_std_test_returncode "Changement des droits[$droits] du répèrtoire ${rep_a_creer} impossible"
+sflib_log_debug "Répertoire [$rep_a_creer] créé"        
+    fi
+sflib_log_debug "FIN fct sflib_std_rep_create()"
+}

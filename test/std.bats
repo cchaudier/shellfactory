@@ -36,3 +36,8 @@ skip
   [ "$status" -ne 202 ]
   echo "$output"|grep "print msg"
 }
+
+@test "DESCRIBE sflib_std_rep_create" {
+  command -v sflib_std_rep_create
+}
+
