@@ -8,10 +8,8 @@
 #@(#)    Commentaires :
 #@(#)======================================================================
 
-# sflib_std_init
-# Test et initialise les Variables
 # USAGE : sflib_std_init
-# ----------------------------------------------
+# Test et initialise les Variables
 sflib_std_init() {
 sflib_log_debug "DEBUT fct sflib_std_init()"
 sflib_std_v_extSum=".sum"
@@ -32,18 +30,14 @@ case ${OS} in
   sflib_log_debug "FIN fct sflib_std_init()"
 }
 
-# sflib_std_sortie
 # USAGE : sflib_std_sortie
-# ----------------------------------------------
 sflib_std_sortie() {
 sflib_log_debug "DEBUT fct sflib_std_sortie()"
 sflib_log_debug "FIN fct sflib_std_sortie()"
 }
 
-# sflib_std_test_returncode
-# Fonction qui test le code retour d'une commande, si celle-ci est en erreur on affiche le message passé en parametre et on sort du script grace a la fonction sortie
 # USAGE : sflib_std_test_returncode "Message à afficher si le code retour est incorrecte"
-#--------------------------------------------------------------------------------------------------------------------------------------------------------------
+# Fonction qui test le code retour d'une commande, si celle-ci est en erreur on affiche le message passé en parametre et on sort du script grace a la fonction sortie
 sflib_std_test_returncode() {
 RC=$?
 msgRC=$1
@@ -57,9 +51,8 @@ fi
 sflib_log_debug "FIN fct sflib_std_testRC()"
 }
 
-# sflib_std_rep_create
-# Création du répertoire s'il n'existe pas
 # USAGE : sflib_std_rep_create <répertoire> [droit]
+# Création du répertoire s'il n'existe pas
 sflib_std_rep_create() {
   rep_a_creer=$1
   if [[ $# -eq 2 ]]; then
@@ -81,9 +74,9 @@ sflib_log_debug "Répertoire [$rep_a_creer] créé"
 sflib_log_debug "FIN fct sflib_std_rep_create()"
 }
 
+# USAGE : sflib_std_rep_existe <répertoire>
 # test l'existance du répertoire
 # Si le répertoire existe la fonction retourne 0 sinon elle retourne 1
-# USAGE : sflib_std_rep_existe <répertoire>
 sflib_std_rep_existe() {
     rep_a_tester=$1
 sflib_log_debug "DEBUT fct sflib_std_rep_existe()"

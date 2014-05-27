@@ -86,3 +86,7 @@ skip
   run sflib_std_rep_existe $dir
   [ $status -eq 1 ]
 }
+
+@test "DESCRIBE sflib_std_fic_exist" {
+  command -v sflib_std_fic_existe
+}
