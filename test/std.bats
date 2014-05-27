@@ -1,10 +1,15 @@
 #!/usr/bin/env bats
 #Tests for std.lib
-. ../lib/log.lib
-. ../lib/std.lib
+setup() {
+  . "$BATS_TEST_DIRNAME/../lib/log.lib"
+  . "$BATS_TEST_DIRNAME/../lib/std.lib"
+
+  rep_log=.
+  script_nom=test_log
+}
 
 sortie() {
-  return $SEVERITE
+  exit  $SEVERITE
 }
 
 @test "DESCRIBE sflib_std_init exist" {
@@ -32,8 +37,8 @@ skip
 }
 
 @test "  -> print message if cr is false" {
-  run 'false; sflib_std_test_returncode "print msg"'
-  [ "$status" -ne 202 ]
+  run "false; sflib_std_test_returncode 'print msg'"
+  [ "$status" -ne 0 ]
   echo "$output"|grep "print msg"
 }
 
@@ -41,3 +46,43 @@ skip
   command -v sflib_std_rep_create
 }
 
+@test "  -> rep is not created and rc is not null" {
+  rep=/root/test_rep_not_created
+  run sflib_std_rep_create $rep
+  [ "$status" -ne 0 ]
+  echo $output | grep "Création du répèrtoire $rep impossible"
+  #test -e $rep
+  #rm -Rf $rep
+}
+
+@test "  -> rep is created" {
+  rep=$BATS_TMPDIR/test_rep_created
+  run sflib_std_rep_create $rep
+  echo "status= $status"
+  [ $status -eq 0 ]
+  test -e $rep
+  rm -Rf $rep
+}
+
+@test "  -> rep is created with 777 permissions" {
+  rep=$BATS_TMPDIR/test_rep_created_with_777
+  run sflib_std_rep_create $rep 777
+  echo "status= $status"
+  [ $status -eq 0 ]
+  #rm -Rf $rep
+}
+
+@test "DESCRIBE sflib_std_rep_exist" {
+  command -v sflib_std_rep_existe
+}
+
+@test "  -> return 0 if directory exist" {
+  run sflib_std_rep_existe $BATS_TEST_DIRNAME
+  [ $status -eq 0 ]
+}
+
+@test "  -> return 1 if directory don't exist" {
+  dir=/dont/existe
+  run sflib_std_rep_existe $dir
+  [ $status -eq 1 ]
+}
