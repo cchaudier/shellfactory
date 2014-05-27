@@ -69,7 +69,7 @@ skip
   run sflib_std_rep_create $rep 777
   echo "status= $status"
   [ $status -eq 0 ]
-  #rm -Rf $rep
+  rm -Rf $rep
 }
 
 @test "DESCRIBE sflib_std_rep_exist" {
@@ -89,4 +89,18 @@ skip
 
 @test "DESCRIBE sflib_std_fic_exist" {
   command -v sflib_std_fic_existe
+}
+
+@test "  -> return 0 if file exist" { 
+  file=$BATS_TMPDIR/test_file_existe
+  touch $file
+  run sflib_std_fic_existe $file
+  [ "$status" -eq 0 ]
+  rm -f $file
+}
+
+@test "  -> return not null if file don't exist" { 
+  file=$BATS_TMPDIR/test_file_dont_existe
+  run sflib_std_fic_existe $file
+  [ "$status" -ne 0 ]
 }

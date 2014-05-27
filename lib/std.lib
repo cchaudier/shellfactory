@@ -88,3 +88,19 @@ sflib_log_debug "Le répertoire <${rep_a_tester}> n'existe pas !"
 sflib_log_debug "FIN fct sflib_std_rep_existe()"
 return $retour
 }
+
+# USAGE : sflib_std_fic_existe <répertoire>
+# test l'existance du fichier
+# Si le fichier existe la fonction retourne 0 sinon elle retourne 1
+sflib_std_fic_existe() {
+  fichier_a_tester=$1
+ 
+sflib_log_debug "DEBUT fct sflib_std_ficExiste()"
+  retour=0
+  if [[ ! -f ${fichier_a_tester} ]]; then
+sflib_log_debug "Le fichier <${fichier_a_tester}> n'existe pas !"    
+    retour=1
+  fi
+sflib_log_debug "FIN fct sflib_std_ficExiste()"
+  return $retour
+}
