@@ -116,8 +116,17 @@ skip
   rm -f $file
 }
 
+@test "  -> file is created" {
+  file=$BATS_TMPDIR/test_file_existe
+  run sflib_std_fic_create $file
+  [ "$status" -eq 0 ]
+  test -e $file
+  rm -f $file
+}
+
 @test "  -> return not null if file don't created" { 
   file=/root/test_file_dont_existe
   run sflib_std_fic_create $file
   [ "$status" -ne 0 ]
 }
+
