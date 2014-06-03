@@ -92,7 +92,6 @@ return $retour
 # USAGE : sflib_std_rep_test <répertoire>
 # Fonction verifiant l'existence d'un repertoire
 # si le repertoire n'existe pas on sort du prog
-#-------------------------------------------------------------------------------
 sflib_std_rep_test () {
     rep_a_tester=$1
 sflib_log_debug "DEBUT fct sflib_std_rep_test ()"
@@ -119,7 +118,6 @@ sflib_log_debug "FIN fct sflib_std_fic_existe()"
 
 # USAGE : sflib_std_fic_test fichier
 # Fonction verifiant l'existence d'un fichier
-#-------------------------------------------------------------------------------
 sflib_std_fic_test () {
   fichier_a_tester=$1
 sflib_log_debug "DEBUT fct sflib_std_fic_test()"
@@ -140,4 +138,15 @@ sflib_log_debug "DEBUT fct sflib_std_fic_create()"
     sflib_std_test_returncode "Création du fichier ${fichier_a_creer} impossible"
   fi
 sflib_log_debug "FIN fct sflib_std_fic_create()"
+}
+
+# USAGE : sflib_std_mv <fichier origine> <fichier ou répertoire de destination>
+#Fonction qui déplace le fichier passé en paramettre 
+sflib_std_mv() {
+    sflib_std_fsrc=$1
+    sflib_std_fdest=$2
+
+sflib_log_debug "fct sflib_std_mv() On déplace [$sflib_std_fsrc] dans [$sflib_std_fdest]"
+    mv $sflib_std_fsrc $sflib_std_fdest
+sflib_std_test_returncode "Déplacement des fichiers [$sflib_std_fsrc] dans [$sflib_std_fdest] impossible"
 }

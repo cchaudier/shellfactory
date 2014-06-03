@@ -138,7 +138,6 @@ skip
   [ "$status" -ne 0 ]
 }
 
-
 @test "DESCRIBE sflib_std_fic_create" {
   command -v sflib_std_fic_create
 }
@@ -164,3 +163,27 @@ skip
   [ "$status" -ne 0 ]
 }
 
+@test "DESCRIBE sflib_std_mv" {
+  command -v sflib_std_mv
+}
+
+@test "  -> file is moved" {
+  file_s=$BATS_TMPDIR/test_file_src
+  file_d=$BATS_TMPDIR/test_file_dest
+  touch $file_s
+  run sflib_std_mv $file_s $file_d
+  [ "$status" -eq 0 ]
+  ! test -e $file_s
+  test -e $file_d
+  rm -f $file_d 
+}
+
+@test "  -> return not null if file is not moved" {
+  file_s=$BATS_TMPDIR/test_file_src
+  file_d=/no_rep/test_file_dest
+  touch $file_s
+  run sflib_std_mv $file_s $file_d
+  [ "$status" -ne 0 ]
+  test -e $file_s
+  rm -f $file_s 
+}
