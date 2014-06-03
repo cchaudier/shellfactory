@@ -150,3 +150,12 @@ sflib_log_debug "fct sflib_std_mv() On déplace [$sflib_std_fsrc] dans [$sflib_s
     mv $sflib_std_fsrc $sflib_std_fdest
 sflib_std_test_returncode "Déplacement des fichiers [$sflib_std_fsrc] dans [$sflib_std_fdest] impossible"
 }
+
+#Fonction qui efface le fichier passé en paramettre mais s'il n'existe pas on ne plante pas
+# USAGE : sflib_std_rm <fichier>
+sflib_std_rm() {
+    fic_a_supprimer=$*
+sflib_log_debug "fct sflib_std_rm() On supprime [$fic_a_supprimer]"
+    rm -Rf $fic_a_supprimer
+sflib_std_test_returncode "Supression de [$fic_a_supprimer] impossible"
+}

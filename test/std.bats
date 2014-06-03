@@ -187,3 +187,15 @@ skip
   test -e $file_s
   rm -f $file_s 
 }
+
+@test "DESCRIBE sflib_std_rm" {
+  command -v sflib_std_rm
+}
+
+@test "  -> file is deleted" {
+  file=$BATS_TMPDIR/test_file_rm
+  touch $file
+  run sflib_std_rm $file
+  [ "$status" -eq 0 ]
+  ! test -e $file
+}
