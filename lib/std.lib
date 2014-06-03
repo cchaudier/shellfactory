@@ -105,6 +105,17 @@ sflib_log_debug "FIN fct sflib_std_fic_existe()"
   return $retour
 }
 
+# USAGE : sflib_std_fic_test fichier
+# Fonction verifiant l'existence d'un fichier
+#-------------------------------------------------------------------------------
+sflib_std_fic_test () {
+  fichier_a_tester=$1
+sflib_log_debug "DEBUT fct sflib_std_fic_test()"
+    sflib_std_fic_existe $fichier_a_tester
+    sflib_std_test_returncode "Le fichier ${fichier_a_tester} n'existe pas !"
+sflib_log_debug "FIN fct sflib_std_fic_test()"
+}
+
 # USAGE : sflib_std_fic_create <fichier>
 #Création du fichier s'il n'existe pas
 sflib_std_fic_create() {

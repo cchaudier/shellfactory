@@ -105,6 +105,25 @@ skip
   [ "$status" -ne 0 ]
 }
 
+@test "DESCRIBE sflib_std_fic_test" {
+  command -v sflib_std_fic_test
+}
+
+@test "  -> return 0 if file existe" {
+  file=$BATS_TMPDIR/test_file_existe
+  touch $file
+  run sflib_std_fic_test $file
+  [ "$status" -eq 0 ]
+  rm -f $file
+}
+
+@test "  -> return not null if file don't exist" { 
+  file=$BATS_TMPDIR/test_file_dont_existe
+  run sflib_std_fic_test $file
+  [ "$status" -ne 0 ]
+}
+
+
 @test "DESCRIBE sflib_std_fic_create" {
   command -v sflib_std_fic_create
 }
