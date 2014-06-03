@@ -87,12 +87,27 @@ skip
   [ $status -eq 1 ]
 }
 
-@test "DESCRIBE sflib_std_fic_exist" {
+@test "DESCRIBE sflib_std_rep_test" {
+  command -v sflib_std_rep_test
+}
+
+@test "  -> return 0 if directory exist" {
+  run sflib_std_rep_test $BATS_TEST_DIRNAME
+  [ $status -eq 0 ]
+}
+
+@test "  -> return not null if directory don't exist" {
+  dir=/dont/existe
+  run sflib_std_rep_test $dir
+  [ $status -ne 0 ]
+}
+
+@test "DESCRIBE sflib_std_fic_existe" {
   command -v sflib_std_fic_existe
 }
 
 @test "  -> return 0 if file exist" { 
-  file=$BATS_TMPDIR/test_file_existe
+  file=$BATS_TMPDIR/test_file_exist
   touch $file
   run sflib_std_fic_existe $file
   [ "$status" -eq 0 ]
@@ -100,7 +115,7 @@ skip
 }
 
 @test "  -> return not null if file don't exist" { 
-  file=$BATS_TMPDIR/test_file_dont_existe
+  file=$BATS_TMPDIR/test_file_dont_exist
   run sflib_std_fic_existe $file
   [ "$status" -ne 0 ]
 }
@@ -109,8 +124,8 @@ skip
   command -v sflib_std_fic_test
 }
 
-@test "  -> return 0 if file existe" {
-  file=$BATS_TMPDIR/test_file_existe
+@test "  -> return 0 if file exist" {
+  file=$BATS_TMPDIR/test_file_exist
   touch $file
   run sflib_std_fic_test $file
   [ "$status" -eq 0 ]
@@ -118,7 +133,7 @@ skip
 }
 
 @test "  -> return not null if file don't exist" { 
-  file=$BATS_TMPDIR/test_file_dont_existe
+  file=$BATS_TMPDIR/test_file_dont_exist
   run sflib_std_fic_test $file
   [ "$status" -ne 0 ]
 }
@@ -129,14 +144,14 @@ skip
 }
 
 @test "  -> return 0 if file is created" {
-  file=$BATS_TMPDIR/test_file_existe
+  file=$BATS_TMPDIR/test_file_exist
   run sflib_std_fic_create $file
   [ "$status" -eq 0 ]
   rm -f $file
 }
 
 @test "  -> file is created" {
-  file=$BATS_TMPDIR/test_file_existe
+  file=$BATS_TMPDIR/test_file_exist
   run sflib_std_fic_create $file
   [ "$status" -eq 0 ]
   test -e $file
@@ -144,7 +159,7 @@ skip
 }
 
 @test "  -> return not null if file don't created" { 
-  file=/root/test_file_dont_existe
+  file=/root/test_file_dont_exist
   run sflib_std_fic_create $file
   [ "$status" -ne 0 ]
 }

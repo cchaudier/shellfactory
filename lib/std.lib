@@ -89,6 +89,18 @@ sflib_log_debug "FIN fct sflib_std_rep_existe()"
 return $retour
 }
 
+# USAGE : sflib_std_rep_test <répertoire>
+# Fonction verifiant l'existence d'un repertoire
+# si le repertoire n'existe pas on sort du prog
+#-------------------------------------------------------------------------------
+sflib_std_rep_test () {
+    rep_a_tester=$1
+sflib_log_debug "DEBUT fct sflib_std_rep_test ()"
+    sflib_std_rep_existe $rep_a_tester
+    sflib_std_test_returncode "Le repertoire ${rep_a_tester} n'existe pas !"
+sflib_log_debug "FIN fct sflib_std_rep_test ()"
+}
+
 # USAGE : sflib_std_fic_existe <répertoire>
 # test l'existance du fichier
 # Si le fichier existe la fonction retourne 0 sinon elle retourne 1
