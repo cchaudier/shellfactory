@@ -34,7 +34,7 @@ setup() {
 }
 
 @test "  -> define all variables" {
-  sflib_log_init
+  run sflib_log_init
     [ -n $PERE ]
     [ -n $FILS ]
     [ -n $PID ]
