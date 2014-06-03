@@ -24,8 +24,7 @@ sflib_log_debug "DEBUT fct sflib_log_init()"
     PID=$$
 
     if ! tty -s; then
-        #Comme le script n'est pas lancé en ligne de commande on trace
-           dans un fichier
+        #Comme le script n'est pas lancé en ligne de commande on trace dans un fichier
         output=file #Sortie des traces dans un fichier uniquement
 	      sflib_log_create
     fi
