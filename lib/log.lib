@@ -24,8 +24,7 @@ sflib_log_debug "DEBUT fct sflib_log_init()"
     PID=$$
 
     if ! tty -s; then
-        #Comme le script n'est pas lancé en ligne de commande on trace
-           dans un fichier
+        #Comme le script n'est pas lancé en ligne de commande on trace dans un fichier
         output=file #Sortie des traces dans un fichier uniquement
 	      sflib_log_create
     fi
@@ -144,19 +143,20 @@ sflib_log_trace() {
 
 #Fonction de traces racourcit
 trace() {
-    sflib_std_trace "[*] $1" I
+    sflib_log_trace "[*] $1" I
 }
 
 warning() {
-    sflib_std_trace "[=] $1" W
+    sflib_log_trace "[=] $1" W
 }
 
 erreur() {
-    sflib_std_trace "[-] $1" E
+    sflib_log_trace "[-] $1" E
 }
 
 alias trc=trace
 alias warn=warning
 alias err=erreur
+alias alerte=erreur
 
 alias debug=sflib_log_debug

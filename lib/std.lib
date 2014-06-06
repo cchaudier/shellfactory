@@ -1,6 +1,6 @@
 #@(#)=======================================================================
 #@(#)    Nom : std.lib
-#@(#)    Objet : Fonctions utilitaire de base
+#@(#)    Objet : Fonctions utilitaires de base
 #@(#)    Entree :  
 #@(#)    Sortie : 
 #@(#)    Date de creation : 21/05/14
@@ -8,40 +8,154 @@
 #@(#)    Commentaires :
 #@(#)======================================================================
 
-# sflib_std_init
+# USAGE : sflib_std_init
 # Test et initialise les Variables
-# USAGE : sflib_std_initVars
-# ----------------------------------------------
 sflib_std_init() {
-sflib_log_debug "DEBUT fct sflib_std_initVars()"
-    export SEVERITE=0
-    PERE=$PPID
-    FILS=$$
-    PID=$$
+sflib_log_debug "DEBUT fct sflib_std_init()"
+sflib_std_v_extSum=".sum"
+sflib_std_v_extGzip=".gz"
+sflib_std_v_ficConf=""
 
-    sflib_std_v_extSum=".sum"
-    sflib_std_v_extGzip=".gz"
-    sflib_std_v_ficConf=""
+#CC : On choisi le awk en fonction du systeme
+OS=$(uname)
+case ${OS} in 
+  AIX|HP-UX|Linux|OSF1) cmd_awk="awk" ;;
+  SunOS) cmd_awk="nawk" ;;
+  *)
+    echo "OS non pris en Compte"
+    cmd_awk="awk"
+  ;;
+  esac
+  alias awk=$cmd_awk
+  sflib_log_debug "FIN fct sflib_std_init()"
+}
 
-    if tty -s; then
-        #Comme le script est lancé en ligne de commande on affiche des infos à l'écran
-        output=screen # affichage des erreurs à l'ecran
+# USAGE : sflib_std_sortie
+sflib_std_sortie() {
+sflib_log_debug "DEBUT fct sflib_std_sortie()"
+sflib_log_debug "FIN fct sflib_std_sortie()"
+}
+
+# USAGE : sflib_std_test_returncode "Message à afficher si le code retour est incorrecte"
+# Fonction qui test le code retour d'une commande, si celle-ci est en erreur on affiche le message passé en parametre et on sort du script grace a la fonction sortie
+sflib_std_test_returncode() {
+RC=$?
+msgRC=$1
+
+sflib_log_debug "DEBUT fct sflib_std_testRC()"
+if [[ $RC -ne 0 ]]; then
+  SEVERITE=202
+  erreur "$msgRC"
+  sortie
+fi
+sflib_log_debug "FIN fct sflib_std_testRC()"
+}
+
+# USAGE : sflib_std_rep_create <répertoire> [droit]
+# Création du répertoire s'il n'existe pas
+sflib_std_rep_create() {
+  rep_a_creer=$1
+  if [[ $# -eq 2 ]]; then
+    droits=$2
+  else
+    droits=770
+  fi
+
+sflib_log_debug "DEBUT fct sflib_std_rep_create() [$rep_a_creer]"
+  sflib_std_rep_existe $rep_a_creer
+  if [[ $? -ne 0 ]]; then
+    #On crée le répertoire en profondeur
+    mkdir -p ${rep_a_creer}
+    sflib_std_test_returncode "Création du répèrtoire ${rep_a_creer} impossible"
+    chmod $droits ${rep_a_creer}
+    sflib_std_test_returncode "Changement des droits[$droits] du répèrtoire ${rep_a_creer} impossible"
+sflib_log_debug "Répertoire [$rep_a_creer] créé"        
+  fi
+sflib_log_debug "FIN fct sflib_std_rep_create()"
+}
+
+# USAGE : sflib_std_rep_existe <répertoire>
+# test l'existance du répertoire
+# Si le répertoire existe la fonction retourne 0 sinon elle retourne 1
+sflib_std_rep_existe() {
+    rep_a_tester=$1
+sflib_log_debug "DEBUT fct sflib_std_rep_existe()"
+    retour=0
+    if [[ ! -d ${rep_a_tester} ]]; then
+sflib_log_debug "Le répertoire <${rep_a_tester}> n'existe pas !"    
+    retour=1
     fi
+sflib_log_debug "FIN fct sflib_std_rep_existe()"
+return $retour
+}
 
-    #CC : On choisi le awk en fonction du systeme
-    OS=$(uname)
-    case ${OS} in
-        AIX|HP-UX|Linux|OSF1)
-            cmd_awk="awk"
-            ;;
-        SunOS)
-            cmd_awk="nawk"
-            ;;
-        *)
-            echo "OS non pris en Compte"
-            cmd_awk="awk"
-            ;;
-    esac
-    alias awk=$cmd_awk
-sflib_log_debug "FIN fct sflib_std_initVars()"
+# USAGE : sflib_std_rep_test <répertoire>
+# Fonction verifiant l'existence d'un repertoire
+# si le repertoire n'existe pas on sort du prog
+sflib_std_rep_test () {
+    rep_a_tester=$1
+sflib_log_debug "DEBUT fct sflib_std_rep_test ()"
+    sflib_std_rep_existe $rep_a_tester
+    sflib_std_test_returncode "Le repertoire ${rep_a_tester} n'existe pas !"
+sflib_log_debug "FIN fct sflib_std_rep_test ()"
+}
+
+# USAGE : sflib_std_fic_existe <répertoire>
+# test l'existance du fichier
+# Si le fichier existe la fonction retourne 0 sinon elle retourne 1
+sflib_std_fic_existe() {
+  fichier_a_tester=$1
+ 
+sflib_log_debug "DEBUT fct sflib_std_fic_existe()"
+  retour=0
+  if [[ ! -f ${fichier_a_tester} ]]; then
+sflib_log_debug "Le fichier <${fichier_a_tester}> n'existe pas !"    
+    retour=1
+  fi
+sflib_log_debug "FIN fct sflib_std_fic_existe()"
+  return $retour
+}
+
+# USAGE : sflib_std_fic_test fichier
+# Fonction verifiant l'existence d'un fichier
+sflib_std_fic_test () {
+  fichier_a_tester=$1
+sflib_log_debug "DEBUT fct sflib_std_fic_test()"
+    sflib_std_fic_existe $fichier_a_tester
+    sflib_std_test_returncode "Le fichier ${fichier_a_tester} n'existe pas !"
+sflib_log_debug "FIN fct sflib_std_fic_test()"
+}
+
+# USAGE : sflib_std_fic_create <fichier>
+#Création du fichier s'il n'existe pas
+sflib_std_fic_create() {
+  fichier_a_creer=$1
+
+sflib_log_debug "DEBUT fct sflib_std_fic_create()"
+  sflib_std_fic_existe $fichier_a_creer
+  if [[ $? -ne 0 ]]; then
+    touch ${fichier_a_creer}
+    sflib_std_test_returncode "Création du fichier ${fichier_a_creer} impossible"
+  fi
+sflib_log_debug "FIN fct sflib_std_fic_create()"
+}
+
+# USAGE : sflib_std_mv <fichier origine> <fichier ou répertoire de destination>
+#Fonction qui déplace le fichier passé en paramettre 
+sflib_std_mv() {
+    sflib_std_fsrc=$1
+    sflib_std_fdest=$2
+
+sflib_log_debug "fct sflib_std_mv() On déplace [$sflib_std_fsrc] dans [$sflib_std_fdest]"
+    mv $sflib_std_fsrc $sflib_std_fdest
+sflib_std_test_returncode "Déplacement des fichiers [$sflib_std_fsrc] dans [$sflib_std_fdest] impossible"
+}
+
+#Fonction qui efface le fichier passé en paramettre mais s'il n'existe pas on ne plante pas
+# USAGE : sflib_std_rm <fichier>
+sflib_std_rm() {
+    fic_a_supprimer=$*
+sflib_log_debug "fct sflib_std_rm() On supprime [$fic_a_supprimer]"
+    rm -Rf $fic_a_supprimer
+sflib_std_test_returncode "Supression de [$fic_a_supprimer] impossible"
 }
