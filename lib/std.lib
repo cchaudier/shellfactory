@@ -12,22 +12,22 @@
 # Cette fonction teste et initialise les variables
 sflib_std_init() {
 sflib_log_debug "DEBUT fct sflib_std_init()"
-sflib_std_v_extSum=".sum"
-sflib_std_v_extGzip=".gz"
-sflib_std_v_ficConf=""
+  sflib_std_v_extSum=".sum"
+  sflib_std_v_extGzip=".gz"
+  sflib_std_v_ficConf=""
 
-#CC : On choisi le awk en fonction du systeme
-OS=$(uname)
-case ${OS} in 
-  AIX|HP-UX|Linux|OSF1) cmd_awk="awk" ;;
-  SunOS) cmd_awk="nawk" ;;
-  *)
-    echo "OS non pris en Compte"
-    cmd_awk="awk"
-  ;;
+  #CC : On choisi le awk en fonction du systeme
+  OS=$(uname)
+  case ${OS} in 
+    AIX|HP-UX|Linux|OSF1) cmd_awk="awk" ;;
+    SunOS) cmd_awk="nawk" ;;
+    *)
+      echo "OS non pris en Compte"
+      cmd_awk="awk"
+    ;;
   esac
   alias awk=$cmd_awk
-  sflib_log_debug "FIN fct sflib_std_init()"
+sflib_log_debug "FIN fct sflib_std_init()"
 }
 
 # USAGE : sflib_std_sortie
