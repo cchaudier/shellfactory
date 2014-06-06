@@ -9,7 +9,7 @@
 #@(#)======================================================================
 
 # USAGE : sflib_std_init
-# Test et initialise les Variables
+# Cette fonction teste et initialise les variables
 sflib_std_init() {
 sflib_log_debug "DEBUT fct sflib_std_init()"
 sflib_std_v_extSum=".sum"
@@ -37,7 +37,9 @@ sflib_log_debug "FIN fct sflib_std_sortie()"
 }
 
 # USAGE : sflib_std_test_returncode "Message à afficher si le code retour est incorrecte"
-# Fonction qui test le code retour d'une commande, si celle-ci est en erreur on affiche le message passé en parametre et on sort du script grace a la fonction sortie
+# Cette fonction teste le code retour de la précedente commande executée
+# si celle-ci est en erreur on affiche le message passé en parametre 
+# et on sort du script avec la fonction sortie
 sflib_std_test_returncode() {
 RC=$?
 msgRC=$1
@@ -52,7 +54,8 @@ sflib_log_debug "FIN fct sflib_std_testRC()"
 }
 
 # USAGE : sflib_std_rep_create <répertoire> [droit]
-# Création du répertoire s'il n'existe pas
+# Cette fonction crée un du répertoire s'il n'existe pas
+# en paramettre optionel on peu spécifier les droits
 sflib_std_rep_create() {
   rep_a_creer=$1
   if [[ $# -eq 2 ]]; then
@@ -75,7 +78,7 @@ sflib_log_debug "FIN fct sflib_std_rep_create()"
 }
 
 # USAGE : sflib_std_rep_existe <répertoire>
-# test l'existance du répertoire
+# Cette fonction teste l'existance d'un répertoire
 # Si le répertoire existe la fonction retourne 0 sinon elle retourne 1
 sflib_std_rep_existe() {
     rep_a_tester=$1
@@ -90,8 +93,8 @@ return $retour
 }
 
 # USAGE : sflib_std_rep_test <répertoire>
-# Fonction verifiant l'existence d'un repertoire
-# si le repertoire n'existe pas on sort du prog
+# Cette fonction verifie l'existence d'un répertoire
+# si le répertoire n'existe pas la fonction sort du script
 sflib_std_rep_test () {
     rep_a_tester=$1
 sflib_log_debug "DEBUT fct sflib_std_rep_test ()"
@@ -101,8 +104,8 @@ sflib_log_debug "FIN fct sflib_std_rep_test ()"
 }
 
 # USAGE : sflib_std_fic_existe <répertoire>
-# test l'existance du fichier
-# Si le fichier existe la fonction retourne 0 sinon elle retourne 1
+# Cette fonction teste l'existance du fichier
+# si le fichier existe la fonction retourne 0 sinon elle retourne 1
 sflib_std_fic_existe() {
   fichier_a_tester=$1
  
@@ -117,7 +120,8 @@ sflib_log_debug "FIN fct sflib_std_fic_existe()"
 }
 
 # USAGE : sflib_std_fic_test fichier
-# Fonction verifiant l'existence d'un fichier
+# Cette fonction verifie l'existence d'un fichier
+# si le fichier n'existe pas la fonction sort du script
 sflib_std_fic_test () {
   fichier_a_tester=$1
 sflib_log_debug "DEBUT fct sflib_std_fic_test()"
@@ -127,7 +131,7 @@ sflib_log_debug "FIN fct sflib_std_fic_test()"
 }
 
 # USAGE : sflib_std_fic_create <fichier>
-#Création du fichier s'il n'existe pas
+# Cette fonction crée un fichier s'il n'existe pas
 sflib_std_fic_create() {
   fichier_a_creer=$1
 
@@ -141,7 +145,7 @@ sflib_log_debug "FIN fct sflib_std_fic_create()"
 }
 
 # USAGE : sflib_std_mv <fichier origine> <fichier ou répertoire de destination>
-#Fonction qui déplace le fichier passé en paramettre 
+# Cette fonction renome le fichier passé en paramettre 
 sflib_std_mv() {
     sflib_std_fsrc=$1
     sflib_std_fdest=$2
@@ -151,11 +155,13 @@ sflib_log_debug "fct sflib_std_mv() On déplace [$sflib_std_fsrc] dans [$sflib_s
 sflib_std_test_returncode "Déplacement des fichiers [$sflib_std_fsrc] dans [$sflib_std_fdest] impossible"
 }
 
-#Fonction qui efface le fichier passé en paramettre mais s'il n'existe pas on ne plante pas
 # USAGE : sflib_std_rm <fichier>
+# Cette fonction efface le fichier passé en paramettre mais s'il n'existe pas on ne plante pas
 sflib_std_rm() {
     fic_a_supprimer=$*
 sflib_log_debug "fct sflib_std_rm() On supprime [$fic_a_supprimer]"
     rm -Rf $fic_a_supprimer
 sflib_std_test_returncode "Supression de [$fic_a_supprimer] impossible"
 }
+
+
