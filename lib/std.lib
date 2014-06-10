@@ -164,4 +164,23 @@ sflib_log_debug "fct sflib_std_rm() On supprime [$fic_a_supprimer]"
 sflib_std_test_returncode "Supression de [$fic_a_supprimer] impossible"
 }
 
+# USAGE : sflib_std_rep_move <source> <destination>
+# Cette fonction déplace les fichiers existants du répertoire source au répertoire cible.
+sflib_std_rep_move() {
+  rep_src=$1
+  rep_dest=$2
+sflib_log_debug "DEBUT fct sflib_std_rep_move()"
+
+  cmd="ls -rc1 $rep_src 2>/dev/null | wc -w"
+  nb_fic=$(eval ${cmd})
+sflib_log_debug "Fonction standard de déplacement des fichiers"
+sflib_log_debug "  ${rep_src} -> ${rep_dest}"
+sflib_log_debug "  ${nb_fic} fichier(s) à traiter"
+
+  if (( $nb_fic != 0 )); then
+    mv $rep_src/* $rep_dest
+    sflib_std_test_returncode "Déplacement du répertoire [$rep_src] impossible"
+  fi
+sflib_log_debug "FIN fct sflib_std_rep_move()"
+}
 
