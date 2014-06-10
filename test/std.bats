@@ -211,13 +211,10 @@ skip
   mkdir -p $rep_d
   touch $rep_s/file1
   touch $rep_s/file2
-DEBUG=1
   run sflib_std_rep_move $rep_s $rep_d
-  echo $output
   [ "$status" -eq 0 ]
   nb_fic_s=$(eval "ls -rc1 $rep_s 2>/dev/null |wc -w")
   nb_fic_d=$(eval "ls -rc1 $rep_d 2>/dev/null |wc -w")
-  echo $(ls -rc1 $rep_d)
   [ $nb_fic_s -eq 0 ]
   [ $nb_fic_d -eq 2 ]
 
