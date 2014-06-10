@@ -27,7 +27,9 @@ Le répertoire test contient les tests unitaires. J'utilise bats pour tester les
 ## Utilisation
 
 Affin d'utiliser les bibliothèques dans vos shells définissez d'abord la variable d'environnement SFLIB avec l'emplacement du répertoire lib de **ShellFactory** dans votre fichier .profile (ou autre en fonction de votre shell) comme par exemple :
-export SFLIB=/usr/lib/shellfactory/lib
+
+    export SFLIB=/usr/lib/shellfactory/lib
+    
 Puis dans vos shells il suffit sourcer les bibliothèques que vous voulez utiliser comme ceci :
     
     . $SFLIB/std.lib
