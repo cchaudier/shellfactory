@@ -199,3 +199,35 @@ skip
   [ "$status" -eq 0 ]
   ! test -e $file
 }
+
+@test "DESCRIBE sflib_std_rep_move" {
+  command -v sflib_std_rep_move
+}
+
+@test "  -> directory moved" {
+  rep_s=$BATS_TMPDIR/test_rep_move_src
+  rep_d=$BATS_TMPDIR/test_rep_move_dest
+  mkdir -p $rep_s
+  mkdir -p $rep_d
+  touch $rep_s/file1
+  touch $rep_s/file2
+  run sflib_std_rep_move $rep_s $rep_d
+  [ "$status" -eq 0 ]
+  nb_fic_s=$(eval "ls -rc1 $rep_s 2>/dev/null |wc -w")
+  nb_fic_d=$(eval "ls -rc1 $rep_d 2>/dev/null |wc -w")
+  [ $nb_fic_s -eq 0 ]
+  [ $nb_fic_d -eq 2 ]
+
+  rm -Rf $rep_s $rep_d
+}
+
+@test "  -> return not null if fonction can't move directory" {
+  rep_s==$BATS_TMPDIR/test_rep_move
+  mkdir -p $rep_s
+  touch $rep_s/file1
+  touch $rep_s/file2
+  rep_d=/dont/exist_dest
+
+  run sflib_std_rep_move $rep_s $rep_d
+  [ "$status" -ne 0 ]
+}
