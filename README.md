@@ -1,4 +1,4 @@
-﻿#﻿ShellFactory
+#﻿ShellFactory
 
 
 Travis [![Build
@@ -24,17 +24,33 @@ Le répertoire lib contient les fichiers formant le cœur de la bibliothèque. L
 
 Le répertoire test contient les tests unitaires. J'utilise bats pour tester les fonctions. Chaque .lib a un fichier .bats associé. 
 
+## Installation
+Avant d'installer **ShellFactory** assurez-vous d'avoir *curl* et *wget* d'installer sur votre machine.
+
+Pour installer **ShellFactory** lancer dans un terminal :
+		curl -L https://raw.githubusercontent.com/cchaudier/shellfactory/0.2/install.sh|sudo bash
+L'installation se fait via sudo car **ShellFactory** s'installe dans /usr/local/shellfactory et modifie le fichier /etc/environnement pour y déclarer la variable $SFLIB.
+
 ## Utilisation
-
-Affin d'utiliser les bibliothèques dans vos shells définissez d'abord la variable d'environnement SFLIB avec l'emplacement du répertoire lib de **ShellFactory** dans votre fichier .profile (ou autre en fonction de votre shell) comme par exemple :
-
-    export SFLIB=/usr/lib/shellfactory/lib
     
 Puis dans vos shells il suffit sourcer les bibliothèques que vous voulez utiliser comme ceci :
     
     . $SFLIB/std.lib
 
 Après avoir sourcé une bibliothèque il faut appeler la fonction d'initialisation sflib_[lib]_init (par exemple sflib_std_init pour la bibliothèque standard)
+
+Ou avec le code suivant :
+	#Chargement des bibliothèques
+	charge_libs()
+	{
+		libs="log std"
+		for lib in $libs; do
+			. ${SFLIB}/${lib}.lib || erreur "Chargmenent de la bibliothèque [$lib] : impossible "
+			sflib_log_debug "Chargmenent de la bibliothèque [$lib] : OK"
+			sflib_${lib}_init || "Initialisation de la bibliothèque [$lib] : impossible "
+			sflib_log_debug "Initialisation de la bibliothèque [$lib] : OK"
+		done
+	}
 
 ### Fonctions obligatoires
 
