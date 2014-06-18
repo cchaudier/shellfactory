@@ -6,7 +6,7 @@ init() {
   sf_tgz_fic=${sf_version}.tar.gz
   sf_url=https://github.com/cchaudier/shellfactory/archive/$sf_tgz_fic
   sf_tmp_dir=/tmp/shellfactory_install_$RANDOM
-  sf_install_dir=/usr/local/shellfactory
+  sf_install_dir=/usr/local/lib/shellfactory
   sf_release_dir=${sf_install_dir}/release
   sf_current_dir=${sf_install_dir}/current
   sf_release_name=shellfactory-$sf_version
@@ -37,6 +37,7 @@ create_arbo() {
   tracef "Création de l'arboresence $sf_install_dir"
   mkdir -p $sf_install_dir
   mkdir -p $sf_release_dir
+  chmod 755 -R $sf_install_dir
 }
 
 get_release() {
@@ -55,7 +56,10 @@ make_current() {
 create_env_var() {
   tracef "Création de la variable d'environnement \$SFLIB"
   export SFLIB=$sf_env_path
-  echo "export SFLIB=$sf_env_path">>/etc/environment
+  cp -p /etc/environment $sf_release_dir/$sf_release_name/environment_sav_$(date '+%Y%m%d_%H%M%S') 
+  grep -v 'export SFLIB' /etc/environment >$sf_tmp_dir/environment_new
+  echo "export SFLIB=$sf_env_path">>$sf_tmp_dir/environment_new
+  cp -f $sf_tmp_dir/environment_new /etc/environment
 }
 
 check_prog() {
