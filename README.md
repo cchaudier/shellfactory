@@ -32,9 +32,12 @@ Pour installer **ShellFactory** lancer dans un terminal :
 L'installation se fait via sudo car **ShellFactory** s'installe dans /usr/local/lib/shellfactory et modifie le fichier /etc/environnement pour y déclarer la variable $SFLIB.
 
 Pour tester l'installation vous pouver executer dans un terminal :
+
     . $SFLIB/log.lib
     trace test_sflib
+
 Vous aurrez alors le resultat suivant :
+
     I|140618_15h35m47 : [*] test_sflib
 
 ## Utilisation
@@ -46,17 +49,18 @@ Dans vos shells il suffit sourcer les bibliothèques que vous voulez utiliser co
 Après avoir sourcé une bibliothèque il faut appeler la fonction d'initialisation sflib_[lib]_init (par exemple sflib_std_init pour la bibliothèque standard)
 
 Ou avec le code suivant :
-	#Chargement des bibliothèques
-	charge_libs()
-	{
-		libs="log std"
-		for lib in $libs; do
-			. ${SFLIB}/${lib}.lib || erreur "Chargmenent de la bibliothèque [$lib] : impossible "
-			sflib_log_debug "Chargmenent de la bibliothèque [$lib] : OK"
-			sflib_${lib}_init || "Initialisation de la bibliothèque [$lib] : impossible "
-			sflib_log_debug "Initialisation de la bibliothèque [$lib] : OK"
-		done
-	}
+
+    #Chargement des bibliothèques
+    charge_libs()
+    {
+        libs="log std"
+        for lib in $libs; do
+            . ${SFLIB}/${lib}.lib || erreur "Chargmenent de la bibliothèque [$lib] : impossible "
+            sflib_log_debug "Chargmenent de la bibliothèque [$lib] : OK"
+            sflib_${lib}_init || "Initialisation de la bibliothèque [$lib] : impossible "
+            sflib_log_debug "Initialisation de la bibliothèque [$lib] : OK"
+            done
+     }
 
 ### Fonctions obligatoires
 
