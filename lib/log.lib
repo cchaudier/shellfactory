@@ -77,7 +77,7 @@ sflib_std_debug "FIN fct sflib_std_logCreate()"
 # renvoi une date formaté pour les traces log
 # USAGE : sflib_log_date
 sflib_log_date() {
-    date '+%y%m%d_%Hh%Mm%S'
+  date '+%y%m%d_%Hh%Mm%S'
 }
 
 # sflib_log_debug
@@ -85,7 +85,7 @@ sflib_log_date() {
 # USAGE : sflib_log_debug "message"
 #----------------------------
 sflib_log_debug() {
-    msg_debug=$1
+    msg_debug=$*
     if [[ $DEBUG -eq 1 ]]; then
         sflib_log_trace "==[DEBUG]== $msg_debug" D
     fi
@@ -143,20 +143,17 @@ sflib_log_trace() {
 
 #Fonction de traces racourcit
 trace() {
-    sflib_log_trace "[*] $1" I
+  sflib_log_trace "[*] $*" I
 }
 
 warning() {
-    sflib_log_trace "[=] $1" W
+  sflib_log_trace "[=] $*" W
 }
 
 erreur() {
-    sflib_log_trace "[-] $1" E
+  sflib_log_trace "[-] $*" E
 }
 
-alias trc=trace
-alias warn=warning
-alias err=erreur
-alias alerte=erreur
-
-alias debug=sflib_log_debug
+debug() {
+  sflib_log_debug "[D] $*"
+}
