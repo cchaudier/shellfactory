@@ -2,7 +2,7 @@
 trap 'sortie 1' ERR
 init() {
   check_root
-  sf_version=0.1
+  sf_version=0.2
   sf_tgz_fic=${sf_version}.tar.gz
   sf_url=https://github.com/cchaudier/shellfactory/archive/$sf_tgz_fic
   sf_tmp_dir=/tmp/shellfactory_install_$RANDOM
