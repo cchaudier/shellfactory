@@ -19,7 +19,7 @@ init() {
 sortie() {
   cr=$1
   rm -rf $sf_tmp_dir
-  [ $cr -eq 0 ] && echo "Installed ShellFactory v$sf_version to ${sf_install_dir}"|| erreur "Exit with code $cr"
+  [ $cr -eq 0 ] && echo "ShellFactory v$sf_version installée dans ${sf_install_dir}"|| erreur "Sortie avec le code $cr"
   exit $cr
 }
 
