@@ -28,7 +28,9 @@ Le répertoire test contient les tests unitaires. J'utilise bats pour tester les
 Avant d'installer **ShellFactory** assurez-vous d'avoir *curl* et *wget* d'installer sur votre machine.
 
 Pour installer **ShellFactory** lancer dans un terminal :
-		curl -L https://raw.githubusercontent.com/cchaudier/shellfactory/0.2/install.sh|sudo bash
+
+    curl -L https://raw.githubusercontent.com/cchaudier/shellfactory/0.2/install.sh|sudo bash
+
 L'installation se fait via sudo car **ShellFactory** s'installe dans /usr/local/lib/shellfactory et modifie le fichier /etc/environnement pour y déclarer la variable $SFLIB.
 
 Pour tester l'installation vous pouver executer dans un terminal :
