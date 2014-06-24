@@ -29,9 +29,11 @@ Avant d'installer **ShellFactory** assurez-vous d'avoir *curl* et *wget* d'insta
 
 Pour installer **ShellFactory** lancer dans un terminal :
 
-    curl -L https://raw.githubusercontent.com/cchaudier/shellfactory/0.2/install.sh|sudo bash
-
-L'installation se fait via sudo car **ShellFactory** s'installe dans /usr/local/lib/shellfactory et modifie le fichier /etc/environnement pour y déclarer la variable $SFLIB.
+		curl -L https://raw.githubusercontent.com/cchaudier/shellfactory/master/install.sh | bash
+L'installation peut se faire de deux manière :
+* local : dans ce cas **ShellFactory** s'installe dans ~/.shellfactory, il vous faudra modifier votre profile (~/.bash_profile, ~/.bashrc, ~/.zshrc etc.) avec la ligne suivante :
+      export SFLIB=$sf_env_path"
+* global : dans ce cas **ShellFactory** s'installe dans /usr/local/lib/shellfactory via sudo et modifie le fichier /etc/environnement pour y déclarer la variable $SFLIB.
 
 Pour tester l'installation vous pouver executer dans un terminal :
 

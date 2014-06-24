@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
 trap 'sortie 1' ERR
 init() {
-  check_root
-  sf_version=0.2
+  sf_version=0.2.1
   sf_tgz_fic=${sf_version}.tar.gz
   sf_url=https://github.com/cchaudier/shellfactory/archive/$sf_tgz_fic
   sf_tmp_dir=/tmp/shellfactory_install_$RANDOM
+  sf_release_name=shellfactory-$sf_version
   sf_install_dir=/usr/local/lib/shellfactory
+  install_type
   sf_release_dir=${sf_install_dir}/release
   sf_current_dir=${sf_install_dir}/current
-  sf_release_name=shellfactory-$sf_version
   sf_env_path=${sf_current_dir}/lib
 
   rm -rf $sf_tmp_dir && mkdir -p $sf_tmp_dir
@@ -35,9 +35,9 @@ tracef() {
 
 create_arbo() {
   tracef "Création de l'arboresence $sf_install_dir"
-  mkdir -p $sf_install_dir
-  mkdir -p $sf_release_dir
-  chmod 755 -R $sf_install_dir
+  $SUDO mkdir -p $sf_install_dir
+  $SUDO mkdir -p $sf_release_dir
+  $SUDO chmod 755 -R $sf_install_dir
 }
 
 get_release() {
@@ -49,17 +49,22 @@ get_release() {
 make_current() {
   tracef "Création du lien release/${sf_release_name}->current"
   cd $sf_release_dir
-  tar xzvf $sf_tmp_dir/$sf_tgz_fic >/dev/null
-  ln -nfs $sf_release_dir/$sf_release_name $sf_current_dir
+  $SUDO tar xzvf $sf_tmp_dir/$sf_tgz_fic >/dev/null
+  $SUDO ln -nfs $sf_release_dir/$sf_release_name $sf_current_dir
 }
 
 create_env_var() {
-  tracef "Création de la variable d'environnement \$SFLIB"
-  export SFLIB=$sf_env_path
-  cp -p /etc/environment $sf_release_dir/$sf_release_name/environment_sav_$(date '+%Y%m%d_%H%M%S') 
-  grep -v 'export SFLIB' /etc/environment >$sf_tmp_dir/environment_new
-  echo "export SFLIB=$sf_env_path">>$sf_tmp_dir/environment_new
-  cp -f $sf_tmp_dir/environment_new /etc/environment
+  if [ "$SUDO" = "sudo " ]; then
+    tracef "Création de la variable d'environnement \$SFLIB"
+    export SFLIB=$sf_env_path
+    $SUDO cp -p /etc/environment $sf_release_dir/$sf_release_name/environment_sav_$(date '+%Y%m%d_%H%M%S') 
+    $SUDO grep -v 'SFLIB' /etc/environment >$sf_tmp_dir/environment_new
+    $SUDO echo "SFLIB=$sf_env_path">>$sf_tmp_dir/environment_new
+    $SUDO cp -f $sf_tmp_dir/environment_new /etc/environment
+  else
+    tracef "Modifier votre profile (~/.bash_profile, ~/.bashrc, ~/.zshrc etc.) avec la ligne suivante :
+      export SFLIB=$sf_env_path"
+  fi
 }
 
 check_prog() {
@@ -72,6 +77,21 @@ check_root() {
     erreur "Vous devez être root pour executer ce script"
     sortie 67
   fi
+}
+
+install_type() {
+  bad_ans=true
+  while $bad_ans; do
+    echo " Comment voulez vous installer le programme ?  
+      1 - local à l'utilisateur (~/.shellfactory)
+      2 - global à tous les utilisateurs ($sf_install_name) (nécéssite les droits root)"
+    read type
+    case $type in
+      1) sf_install_dir="$HOME/.shellfactory" && bad_ans=false;;
+      2) SUDO="sudo " && bad_ans=false ;;
+      *) bad_ans=true ;;
+    esac
+  done
 }
 
 init
