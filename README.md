@@ -32,7 +32,9 @@ Pour installer **ShellFactory** lancer dans un terminal :
     curl -L https://raw.githubusercontent.com/cchaudier/shellfactory/master/install.sh > /tmp/sf_install.sh && bash /tmp/sf_install.sh ; rm -f /tmp/sf_install.sh
 L'installation peut se faire de deux manière :
 * local : dans ce cas **ShellFactory** s'installe dans ~/.shellfactory, il vous faudra modifier votre profile (~/.bash_profile, ~/.bashrc, ~/.zshrc etc.) avec la ligne suivante :
+
     export SFLIB=/home/vagrant/.shellfactory/current/lib
+
 * global : dans ce cas **ShellFactory** s'installe dans /usr/local/lib/shellfactory via sudo et modifie le fichier /etc/environnement pour y déclarer la variable $SFLIB.
 
 Pour tester l'installation vous pouver executer dans un terminal :
