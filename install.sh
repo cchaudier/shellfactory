@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 trap 'sortie 1' ERR
 init() {
-  sf_version=0.2
+  sf_version=0.2.1
   sf_tgz_fic=${sf_version}.tar.gz
   sf_url=https://github.com/cchaudier/shellfactory/archive/$sf_tgz_fic
   sf_tmp_dir=/tmp/shellfactory_install_$RANDOM
