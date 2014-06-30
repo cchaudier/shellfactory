@@ -70,7 +70,7 @@ sflib_log_debug "DEBUT fct sflib_log_create()"
             sflib_std_fic_create ${fic_log}
         fi
 #TODO utiliser un tableau de hachage log pour rep,fic et date
-sflib_std_debug "FIN fct sflib_std_logCreate()"
+sflib_log_debug "FIN fct sflib_std_logCreate()"
 }
 
 # sflib_log_date
