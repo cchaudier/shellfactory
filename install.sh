@@ -7,7 +7,7 @@ init() {
   sf_tmp_dir=/tmp/shellfactory_install_$RANDOM
   sf_release_name=shellfactory-$sf_version
   sf_install_dir=/usr/local/lib/shellfactory
-  install_type
+  install_type $*
   sf_release_dir=${sf_install_dir}/release
   sf_current_dir=${sf_install_dir}/current
   sf_env_path=${sf_current_dir}/lib
@@ -80,21 +80,35 @@ check_root() {
 }
 
 install_type() {
-  bad_ans=true
-  while $bad_ans; do
-    echo " Comment voulez vous installer le programme ?  
-      1 - local à l'utilisateur (~/.shellfactory)
-      2 - global à tous les utilisateurs ($sf_install_name) (nécéssite les droits root)"
-    read type
-    case $type in
-      1) sf_install_dir="$HOME/.shellfactory" && bad_ans=false;;
-      2) SUDO="sudo " && bad_ans=false ;;
-      *) bad_ans=true ;;
-    esac
+  while getopts "lg" opt; do
+    case $opt in
+       l) type=1 ;;
+       g) type=2 ;;
+     esac
   done
+  if [[ $type -eq 1 ]] || [[ $type -eq 2 ]]; then
+    set_type
+  else
+    bad_ans=true
+    while $bad_ans; do
+      echo " Comment voulez vous installer le programme ?  
+        1 - local à l'utilisateur (~/.shellfactory)
+        2 - global à tous les utilisateurs ($sf_install_name) (nécéssite les droits root)"
+      read type
+      set_type
+    done
+  fi
 }
 
-init
+set_type() {
+  case $type in
+    1) sf_install_dir="$HOME/.shellfactory" && bad_ans=false;;
+    2) SUDO="sudo " && bad_ans=false ;;
+    *) bad_ans=true ;;
+  esac
+}
+
+init $*
 create_arbo
 get_release
 make_current
