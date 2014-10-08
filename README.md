@@ -5,6 +5,8 @@ Travis [![Build
 Status](https://travis-ci.org/cchaudier/shellfactory.svg?branch=master)](https://travis-ci.org/cchaudier/shellfactory)
 | Drone.io [![Build
 Status](https://drone.io/github.com/cchaudier/shellfactory/status.png)](https://drone.io/github.com/cchaudier/shellfactory/latest)
+| Codeship.io [ ![Codeship Status for
+cchaudier/shellfactory](https://www.codeship.io/projects/319995d0-22fc-0132-5bba-624a1888457d/status)](https://www.codeship.io/projects/36618)
 
 ## Qu'est-ce que c'est ?
 
