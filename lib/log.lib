@@ -12,6 +12,7 @@
 # Test et initialise les variables utils aux logs
 # USAGE : sflib_log_init
 # ----------------------------------------------
+
 sflib_log_init() {
 # TODO : si sflib_std non chargé alors la charger car c'est une lib dépendante
 # TODO definir fic_log et rep_log
