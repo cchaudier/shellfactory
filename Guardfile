@@ -16,6 +16,6 @@ guard :shell do
   watch /(test|lib)\/(.*)\.(lib|bats)/ do |m|
     puts m[0] + " has changed."
     puts "launch bats " + m[2] + ".bats"
-    `bash -l cd test && bats #{m[2]}.bats`
+    `cd test && bats -p #{m[2]}.bats`
   end
 end

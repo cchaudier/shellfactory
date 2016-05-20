@@ -32,7 +32,7 @@ RUN rbenv rehash
 
 RUN echo 'install: --no-document' > ~/.gemrc
 RUN echo 'update: --no-document' >> ~/.gemrc
-RUN dircolors -p > /etc/dircolors
+#RUN dircolors -p > /etc/dircolors
 RUN bash -l -c 'gem install bundler'
 
 #My app
@@ -40,5 +40,4 @@ ADD . /app/bats-tests
 WORKDIR /app/bats-tests
 RUN bash -l -c 'bundle install'
 
-ENTRYPOINT /bin/bash 
-CMD bundle exec guard
+ENTRYPOINT bash -l -c 'bundle exec guard'
